@@ -20,12 +20,12 @@ const Main = () => {
       return(str.slice(0, num) + "...")
     }
     else{
-      return str
+      return str;
     }
     
   }
 
-  
+  //Trfjsdnfjkdsj;lfkds
 
   return (
     <div className="w-full h-[550px] text-white">
