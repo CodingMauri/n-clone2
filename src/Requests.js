@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from "react";
 import axios from "axios";
-import MovieCarousel from "./Components /MovieCarousel";
+import MovieCarousel from "./Components/MovieCarousel";
 //This file is where i am going to keep the request i will be using
 const key = process.env.REACT_APP_MOVIE_KEY;
 //Creating a higher ordered component to filter out the movies by genreˆ
