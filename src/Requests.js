@@ -23,6 +23,10 @@ const withGenre = (WrappedComponent, genre) => {
 export const ActionMovies = withGenre(MovieCarousel, 28);
 export const ComedyMovies = withGenre(MovieCarousel, 35);
 export const HorrorMovies = withGenre(MovieCarousel, 27);
+export const AnimatedMovies = withGenre(MovieCarousel, 16);
+
+
+
 
 
 const api = `https://api.themoviedb.org/3/`
