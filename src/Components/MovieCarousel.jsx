@@ -29,7 +29,7 @@ const MovieCarousel = ({ movies, genre }) => {
   const imagePath = "https://image.tmdb.org/t/p/w500/";
   return (
     <>
-      <h1 className="text-white font-bold md:text-xl p-4">
+      <h1 className="text-white font-bold md:text-xl py-9 ml-5">
         {genreName} movies
       </h1>
       <div className="relative flex items-center">
