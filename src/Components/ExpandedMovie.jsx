@@ -1,7 +1,5 @@
 import React from "react";
-import { motion } from "framer-motion";
 import { FiPlayCircle } from "react-icons/fi";
-import Youtube from "react-icons"
 function ExpandedMovie({ item }) {
 
     console.log(item)
