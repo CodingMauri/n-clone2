@@ -23,7 +23,7 @@ const MovieCarousel = ({ movies, genre ,rowId}) => {
   console.log(movies);
   useEffect(() => {
     getGenres();
-  }, [genre]);
+  }, []);
 
   const slideLeft = () => {
     let slider = document.getElementById("slider" + rowId)

@@ -16,7 +16,7 @@ const withGenre = (WrappedComponent, genre) => {
           setMovies(res.data.results)
       })
       .catch((err) => console.log(err))
-    },[genre]);
+    },[]);
     return <WrappedComponent movies = {movies} genre = {genre} {...props} />
   };
 };

@@ -23,9 +23,9 @@ const Main = () => {
     }
   };
 
-  const scaleUp = {
-    scale:1.2
-  }
+  // const scaleUp = {
+  //   scale:1.2
+  // }
   return (
     <div className="w-full h-[750px] md:min-h-[500px] text-white">
       <div className="w-full h-full">
