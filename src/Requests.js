@@ -24,6 +24,7 @@ export const ActionMovies = withGenre(MovieCarousel, 28);
 export const ComedyMovies = withGenre(MovieCarousel, 35);
 export const HorrorMovies = withGenre(MovieCarousel, 27);
 export const AnimatedMovies = withGenre(MovieCarousel, 16);
+export const CrimeMovies = withGenre(MovieCarousel , 80)
 
 
 

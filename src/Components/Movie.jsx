@@ -1,30 +1,45 @@
 import {React,useState} from 'react'
 import { FaHeart, FaRegHeart } from "react-icons/fa";
+import {motion} from "framer-motion"
+import ExpandedMovie from "./ExpandedMovie"
 
 function Movie({item}) {
     const [like, setLike] = useState(false);
 
+    const [expand,setExpand] = useState(null)
+
 
   return (
-    <div className="w-[160px] sm:w-[200px] md:w-[240px] lg:w-[280px] inline-block cursor-pointer relative p-2">
+    <motion.div whileHover={{transition:1 ,scale:0.9}}
+      className="w-[160px] sm:w-[200px] md:w-[240px] lg:w-[280px] inline-block cursor-pointer relative p-2 "
+      onMouseEnter = {() => setExpand(item)}
+      onMouseLeave = {() => setExpand(null)}>
+      {expand === item && <ExpandedMovie item = {item} />}
     <img
       className="w-full h-auto block"
       src={`https://image.tmdb.org/t/p/w500/${item?.poster_path}`}
       alt={item?.title}
-    />
-    <div className="absolute top-0 left-0 w-full h-full hover:bg-black/80 opacity-0 hover:opacity-100 text-white">
-      <p className="white-space-normal text-xs md:text-sm font-bold flex justify-center items-center h-full text-center">
-        {item?.title}
-      </p>
+      id = {item.id}
+      />
+
+    <div className="absolute bottom-0 w-full opacity-0 hover:opacity-100 text-white">
+      
       <p>
         {like ? (
           <FaHeart className="absolute top-4 left-4 text-gray-300" />
-        ) : (
-          <FaRegHeart className="absolute top-4 left-4 text-gray-300" />
-        )}
+          ) : (
+            <FaRegHeart className="absolute top-4 left-4 text-gray-300" />
+            )}
       </p>
+     
     </div>
-  </div>
+
+    {/* <div className = "absolute w-[95%] h-[50px] shadow-md bg-[#141414] z-20 ">
+      <motion.div whileHover = {{scale:1.2}}className = "absolute w-full flex justify-center items-center py-2 text-white hidden text-3xl">
+        <FiPlayCircle />
+      </motion.div>
+    </div> */}
+  </motion.div>
   )
 }
 
