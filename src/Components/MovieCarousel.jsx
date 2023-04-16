@@ -39,17 +39,17 @@ const MovieCarousel = ({ movies, genre ,rowId}) => {
       <h1 className="text-white font-bold md:text-xl py-9 ml-5">
         {genreName} movies
       </h1>
-      <div className="relative flex items-center group:">
-        <MdChevronLeft onClick = {slideLeft} className = "bg-white left-0 rounded-full absolute opacity-50 hover:opacity-100 cursor-pointer z-10 group-hover:block" size={40} />
+      <div className="relative flex items-center group">
+        <MdChevronLeft onClick = {slideLeft} className = "bg-white left-0 rounded-full absolute hidden opacity-50 hover:opacity-100 cursor-pointer z-10 group-hover:block" size={40} />
         <div
           id={"slider" + rowId}
-          className="w-full h-full overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide relative"
+          className="w-full h-full overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide  relative"
         >
           {movies.map((item, id) => {
             return <Movie item={item} id={id} />;
           })}
         </div>
-        <MdChevronRight onClick = {slideRight} className = "bg-white rounded-full absolute opacity-50 hover:opacity-100  z-20  cursor:pointer group-hover:block right-0" size={40} />
+        <MdChevronRight onClick = {slideRight} className = "bg-white rounded-full absolute hidden opacity-50 hover:opacity-100  z-20  cursor:pointer group-hover:block right-0" size={40} />
 
       </div>
     </>

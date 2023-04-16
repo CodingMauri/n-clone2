@@ -23,12 +23,13 @@ const Main = () => {
     }
   };
 
-  //Trfjsdnfjkdsj;lfkds
-
+  const scaleUp = {
+    scale:1.2
+  }
   return (
-    <div className="w-full h-[550px] text-white">
+    <div className="w-full h-[750px] md:min-h-[500px] text-white">
       <div className="w-full h-full">
-        <div className="absolute w-full h-[550px] bg-gradient-to-r from-black"></div>
+        <div className="absolute w-full h-[750px] md:min-h-[500px]  bg-gradient-to-b from-transparent to-[#141414]"></div>
         <img
           className="w-full h-full object-cover"
           src={`https://image.tmdb.org/t/p/original/${mixMovies?.backdrop_path}`}
@@ -54,10 +55,8 @@ const Main = () => {
             {cutText(mixMovies?.overview, 200)}
           </p>
         </div>
-       
-      </div>
-     
 
+      </div>
     </div>
   );
 };

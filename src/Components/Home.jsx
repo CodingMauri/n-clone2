@@ -1,6 +1,6 @@
 import React from 'react'
 import Main from './Main'
-import { ActionMovies, HorrorMovies, ComedyMovies, AnimatedMovies } from '../Requests'
+import { ActionMovies, HorrorMovies, ComedyMovies, AnimatedMovies, CrimeMovies } from '../Requests'
 export default function Home() {
   return (
     <div className = "bg-[#141414]">
@@ -9,6 +9,7 @@ export default function Home() {
         <HorrorMovies rowId = "2" />
         <ComedyMovies rowId = "3" /> 
         <AnimatedMovies rowId = "4" />
+        <CrimeMovies rowId = "5" />
 
     </div>
   )
