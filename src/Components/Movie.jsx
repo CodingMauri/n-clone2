@@ -22,18 +22,6 @@ function Movie({item}) {
       id = {item.id}
       />
 
-    <div className="absolute bottom-0 w-full opacity-0 hover:opacity-100 text-white">
-      
-      <p>
-        {like ? (
-          <FaHeart className="absolute top-4 left-4 text-gray-300" />
-          ) : (
-            <FaRegHeart className="absolute top-4 left-4 text-gray-300" />
-            )}
-      </p>
-     
-    </div>
-
     {/* <div className = "absolute w-[95%] h-[50px] shadow-md bg-[#141414] z-20 ">
       <motion.div whileHover = {{scale:1.2}}className = "absolute w-full flex justify-center items-center py-2 text-white hidden text-3xl">
         <FiPlayCircle />
