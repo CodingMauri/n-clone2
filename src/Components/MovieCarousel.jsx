@@ -20,7 +20,6 @@ const MovieCarousel = ({ movies, genre ,rowId}) => {
       })
       .catch((err) => console.log(err));
   };
-  console.log(movies);
   useEffect(() => {
     getGenres();
   });

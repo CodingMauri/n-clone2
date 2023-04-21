@@ -33,7 +33,10 @@ export const CrimeMovies = withGenre(MovieCarousel , 80)
 const api = `https://api.themoviedb.org/3/`
 
 const requests = {
-  requestPopular: `${api}movie/popular?api_key=${key}&language=en-US&page=1`
+  requestPopular: `${api}movie/popular?api_key=${key}&language=en-US&page=1`,
 };
+
+
+
 
 export default requests;
