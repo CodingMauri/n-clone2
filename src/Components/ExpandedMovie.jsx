@@ -2,19 +2,20 @@ import { React, useState, useEffect } from "react";
 import { FiPlayCircle } from "react-icons/fi";
 import { getYoutubeData } from "../Requests";
 import { motion } from "framer-motion";
-import Youtube from "react-youtube";
+import Trailer from "./Trailer";
 
 function ExpandedMovie({ item }) {
   const movieId = item.id
 
-  const [youtubePlayer, setYoutubePlayer] = useState(false);
 
   const [selected, setSelected] = useState([]);
+
+  const [showTrailer,setShowTrailer] = useState(false)
 
   console.log(selected + " I am Selected")
 
   const handlePosterClick = () => {
-    setYoutubePlayer(true);
+    setShowTrailer(true)
   };
   
   const endTrailer = (e) => {
@@ -32,30 +33,20 @@ function ExpandedMovie({ item }) {
   .find((video) => video.site === "YouTube");
   
   
-  const opts = {
-    height: `390`,
-    width: `640`,
-    playerVars: {
-      autoplay: 1,
-    },
-  };
+  
   useEffect(() => {
     getYoutubeData(movieId, setSelected);
   }, [movieId]);
   return (
     <>
+
+    {showTrailer ?  (
+    <Trailer endTrailer = {endTrailer} officialTrailer = {officialTrailer} fallbackTrailer = {fallbackTrailer} />) : <div>loading...</div>}
       <div className="absolute w-[94.5%] bottom-0 h-[100px] bg-gradient-b from-[black] to-transparent text-white">
         <div className="w-full h-full absolute text-4xl flex justify-center items-center">
-          {officialTrailer && youtubePlayer && (
-            <Youtube
-              className = "flex justify-center items-center z-30"
-              videoId={officialTrailer?.key || fallbackTrailer?.key}
-              opts={opts}
-              onStateChange={endTrailer}
-            />
-          )}
+        
           <motion.div whileHover={{ scale: 1.2 }}>
-            <FiPlayCircle onClick={handlePosterClick} />
+            <FiPlayCircle onClick={handlePosterClick } />
           </motion.div>
         </div>
       </div>
