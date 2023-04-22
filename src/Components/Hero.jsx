@@ -1,9 +1,17 @@
 import { React, useState, useEffect } from "react";
 import axios from "axios";
-import requests from "../Requests";
-const Main = () => {
+import requests,{getYoutubeData} from "../Requests"
+import Youtube from "react-youtube"
+const Hero = () => {
   const [popularMovie, setPopularMovies] = useState([]);
 
+
+  const  [youtubePlayer,setYoutubePlayer] = useState(false)
+  const [playTrailer,setPlayTrailer] = useState([])
+  const movieId = popularMovie.id
+  console.log(popularMovie)
+
+  
   const mixMovies =
     popularMovie[Math.floor(Math.random() * popularMovie.length)];
 
@@ -13,7 +21,16 @@ const Main = () => {
       .then((res) => setPopularMovies(res.data.results))
       .catch((err) => console.log(err));
   }, []);
-  // console.log(mixMovies);
+
+  
+
+  const officialTrailer = playTrailer
+  ?.filter((video) => video.type === "Trailer" && video.official)
+  .find((video) => video.site === "YouTube");
+  
+  const fallbackTrailer = playTrailer
+  ?.filter((video) => video.type === "Trailer")
+  .find((video) => video.site === "YouTube");
 
   const cutText = (str, num) => {
     if (str?.length > num) {
@@ -23,6 +40,19 @@ const Main = () => {
     }
   };
 
+  const handleTrailerClick = () => {
+    setYoutubePlayer(true)
+  }
+  useEffect(() => {
+    getYoutubeData(movieId,setPlayTrailer)
+  },[movieId])
+  const opts = {
+    height: `390`,
+    width: `640`,
+    playerVars: {
+      autoplay: 1,
+    },
+  };
   // const scaleUp = {
   //   scale:1.2
   // }
@@ -40,8 +70,16 @@ const Main = () => {
             {mixMovies?.title}
           </h1>
           <div>
-            <button className="border bg-gray-300 text-black border-gray-300 py-2 px-5">
-              Play
+
+            {officialTrailer && youtubePlayer && (
+              <Youtube
+              className = "absolute w-full z-50 "
+              opts = {opts}
+              videoId = {officialTrailer?.key || fallbackTrailer?.key}
+                />
+            )}
+            <button onClick = {handleTrailerClick}className="border bg-gray-300 text-black border-gray-300 py-2 px-5">
+              Play Trailer
             </button>
             <button className="border text-white border-gray-300 py-2 px-5 ml-4">
               {" "}
@@ -61,4 +99,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default Hero;

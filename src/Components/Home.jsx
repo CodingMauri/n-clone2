@@ -1,10 +1,10 @@
 import React from 'react'
-import Main from './Main'
+import Hero from './Hero'
 import { ActionMovies, HorrorMovies, ComedyMovies, AnimatedMovies, CrimeMovies } from '../Requests'
 export default function Home() {
   return (
     <div className = "bg-[#141414]">
-        <Main /> 
+        <Hero /> 
         <ActionMovies rowId = "1" />
         <HorrorMovies rowId = "2" />
         <ComedyMovies rowId = "3" /> 
