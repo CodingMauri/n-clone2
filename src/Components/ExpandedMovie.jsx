@@ -34,9 +34,7 @@ function ExpandedMovie({ item }) {
   
   
   
-  useEffect(() => {
-    getYoutubeData(movieId, setSelected);
-  }, [movieId]);
+  
   return (
     <>
 

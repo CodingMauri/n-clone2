@@ -3,6 +3,10 @@ import Youtube from "react-youtube";
 
 function Trailer({officialTrailer,youtubePlayer,endTrailer,fallbackTrailer}) {
 
+
+  useEffect(() => {
+    getYoutubeData(movieId, setSelected);
+  }, [movieId]);
     const opts = {
         height: `80%`,
         width: `80%`,
