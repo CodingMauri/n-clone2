@@ -2,11 +2,9 @@ import { React, useState, useEffect } from "react";
 import axios from "axios";
 import Movie from "./Movie";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
-import Trailer from "./Trailer";
 const MovieCarousel = ({ movies, genre, rowId }) => {
   //calling for genres
   const [genreName, setGenreName] = useState("");
-  const [showTrailer, setShowTrailer] = useState(false);
   // console.log(genre)
   const getGenres = () => {
     axios
@@ -52,8 +50,7 @@ const MovieCarousel = ({ movies, genre, rowId }) => {
           {movies.map((item, id) => {
             return (
               <>
-                <Movie setShowTrailer={setShowTrailer} item={item} id={id} />
-                {showTrailer ? <Trailer movieId={item.id} /> : null}
+                <Movie  item={item} id={id} />
               </>
             );
           })}

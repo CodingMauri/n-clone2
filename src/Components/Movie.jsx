@@ -1,6 +1,6 @@
 import { React, useState } from "react";
 import ExpandedMovie from "./ExpandedMovie";
-function Movie({ item ,setShowTrailer}) {
+function Movie({ item }) {
   const [expand, setExpand] = useState(null);
   return (
     
@@ -11,7 +11,7 @@ function Movie({ item ,setShowTrailer}) {
     onMouseLeave={() => setExpand(null)}
     >
         {expand === item && (
-          <ExpandedMovie item={item} setShowTrailer={setShowTrailer} />
+          <ExpandedMovie item={item}  />
           )}
         <img
           className="w-full h-auto block"
