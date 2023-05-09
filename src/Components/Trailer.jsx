@@ -1,13 +1,20 @@
 import React from "react";
-import {useState,useEffect} from "react"
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import Youtube from "react-youtube";
 import { getYoutubeData } from "../Requests";
-function Trailer({movieId}) {
-  const [selected,setSelected] = useState([])
+function Trailer() {
+  const [selected, setSelected] = useState([]);
+
+  const { movieId } = useParams();
+
+  const { backdrop_path } = useParams();
+
+  console.log(backdrop_path)
   useEffect(() => {
     getYoutubeData(movieId, setSelected);
   }, [movieId]);
-    
+
   console.log(movieId);
   const endTrailer = (e) => {
     if (e.data === window.YT.PlayerState.ENDED) {
@@ -23,29 +30,28 @@ function Trailer({movieId}) {
     ?.filter((video) => video.type === "Trailer")
     .find((video) => video.site === "YouTube");
 
- 
-
   const opts = {
-    height: "800",
-    width: "800",
+    height: "390",
+    width: "640",
 
     playerVars: {
       autoplay: 1,
     },
   };
   return (
-    <>
+    <div className="w-full h-full flex justify-center items-center  ">
+      {/* <div className = "w-full h-full object-cover">
+        <img src = {`https://image.tmdb.org/t/p/original${backdrop_path}`} alt = "movie" />
+      </div> */}
+       
       {officialTrailer && (
-        <div className="w-[90%] h-[90%] relative z-90">
-          <Youtube
-            className="absolute z-70"
-            videoId={officialTrailer?.key || fallbackTrailer?.key}
-            opts={opts}
-            onStateChange={endTrailer}
-          />
-        </div>
+        <Youtube
+          videoId={officialTrailer?.key || fallbackTrailer?.key}
+          opts={opts}
+          onStateChange={endTrailer}
+        />
       )}
-    </>
+    </div>
   );
 }
 
