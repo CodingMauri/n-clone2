@@ -1,17 +1,16 @@
 import { React, useState, useEffect } from "react";
 import axios from "axios";
-import requests,{getYoutubeData} from "../Requests"
-import Youtube from "react-youtube"
+import requests from "../Requests"
+import {useNavigate} from "react-router-dom"
 const Hero = () => {
+
+  const navigate = useNavigate()
   const [popularMovie, setPopularMovies] = useState([]);
 
-
-  const  [youtubePlayer,setYoutubePlayer] = useState(false)
-  const [playTrailer,setPlayTrailer] = useState([])
-  const movieId = popularMovie.id
-  console.log(popularMovie)
+  
 
   
+
   const mixMovies =
     popularMovie[Math.floor(Math.random() * popularMovie.length)];
 
@@ -24,13 +23,11 @@ const Hero = () => {
 
   
 
-  const officialTrailer = playTrailer
-  ?.filter((video) => video.type === "Trailer" && video.official)
-  .find((video) => video.site === "YouTube");
   
-  const fallbackTrailer = playTrailer
-  ?.filter((video) => video.type === "Trailer")
-  .find((video) => video.site === "YouTube");
+
+  const handleTrailerClick = () => {
+    navigate(`/trailer/${mixMovies.id}`);
+  }
 
   const cutText = (str, num) => {
     if (str?.length > num) {
@@ -39,20 +36,8 @@ const Hero = () => {
       return str;
     }
   };
-
-  const handleTrailerClick = () => {
-    setYoutubePlayer(true)
-  }
-  useEffect(() => {
-    getYoutubeData(movieId,setPlayTrailer)
-  },[movieId])
-  const opts = {
-    height: `390`,
-    width: `640`,
-    playerVars: {
-      autoplay: 1,
-    },
-  };
+  
+  
   // const scaleUp = {
   //   scale:1.2
   // }
@@ -70,14 +55,6 @@ const Hero = () => {
             {mixMovies?.title}
           </h1>
           <div>
-
-            {officialTrailer && youtubePlayer && (
-              <Youtube
-              className = "absolute w-full z-50 "
-              opts = {opts}
-              videoId = {officialTrailer?.key || fallbackTrailer?.key}
-                />
-            )}
             <button onClick = {handleTrailerClick}className="border bg-gray-300 text-black border-gray-300 py-2 px-5">
               Play Trailer
             </button>

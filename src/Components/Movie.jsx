@@ -1,10 +1,11 @@
 import { React, useState } from "react";
 import ExpandedMovie from "./ExpandedMovie";
+import {motion} from "framer-motion"
 function Movie({ item }) {
   const [expand, setExpand] = useState(null);
   return (
     
-    <div
+    <motion.div
     whileHover={{ transition: 1, scale: 0.9 }}
     className="w-[160px] sm:w-[200px] md:w-[240px] lg:w-[280px] inline-block cursor-pointer relative p-2 "
     onMouseEnter={() => setExpand(item)}
@@ -21,7 +22,7 @@ function Movie({ item }) {
         />
 
         <div className="absolute bottom-0 w-full opacity-0 hover:opacity-100 text-white"></div>
-      </div>
+      </motion.div>
     
   );
 }

@@ -7,7 +7,10 @@ function Trailer() {
   const [selected, setSelected] = useState([]);
 
   const { movieId } = useParams();
-  const {backdrop_path} = useParams()
+
+  const { backdrop_path } = useParams();
+
+  console.log(backdrop_path)
   useEffect(() => {
     getYoutubeData(movieId, setSelected);
   }, [movieId]);
@@ -37,6 +40,9 @@ function Trailer() {
   };
   return (
     <div className="w-full h-full flex justify-center items-center  ">
+      {/* <div className = "w-full h-full object-cover">
+        <img src = {`https://image.tmdb.org/t/p/original${backdrop_path}`} alt = "movie" />
+      </div> */}
        
       {officialTrailer && (
         <Youtube
