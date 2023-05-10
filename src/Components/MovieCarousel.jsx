@@ -1,10 +1,9 @@
-import { useState, useEffect } from "react";
+import { React, useState, useEffect } from "react";
 import axios from "axios";
 import Movie from "./Movie";
-import {MdChevronLeft,MdChevronRight} from "react-icons/md"
-const MovieCarousel = ({ movies, genre ,rowId}) => {
+import { MdChevronLeft, MdChevronRight } from "react-icons/md";
+const MovieCarousel = ({ movies, genre, rowId }) => {
   //calling for genres
-
   const [genreName, setGenreName] = useState("");
   // console.log(genre)
   const getGenres = () => {
@@ -20,19 +19,18 @@ const MovieCarousel = ({ movies, genre ,rowId}) => {
       })
       .catch((err) => console.log(err));
   };
-  console.log(movies);
   useEffect(() => {
     getGenres();
   });
 
   const slideLeft = () => {
-    let slider = document.getElementById("slider" + rowId)
-    slider.scrollLeft = slider.scrollLeft - 500
-  }
+    let slider = document.getElementById("slider" + rowId);
+    slider.scrollLeft = slider.scrollLeft - 500;
+  };
   const slideRight = () => {
-    let slider = document.getElementById("slider" + rowId)
-    slider.scrollLeft = slider.scrollLeft + 500
-  }
+    let slider = document.getElementById("slider" + rowId);
+    slider.scrollLeft = slider.scrollLeft + 500;
+  };
 
   return (
     <>
@@ -40,17 +38,28 @@ const MovieCarousel = ({ movies, genre ,rowId}) => {
         {genreName} movies
       </h1>
       <div className="relative flex items-center group">
-        <MdChevronLeft onClick = {slideLeft} className = "bg-white left-0 rounded-full absolute hidden opacity-50 hover:opacity-100 cursor-pointer z-10 group-hover:block" size={40} />
+        <MdChevronLeft
+          onClick={slideLeft}
+          className="bg-white left-0 rounded-full absolute hidden opacity-50 hover:opacity-100 cursor-pointer z-10 group-hover:block"
+          size={40}
+        />
         <div
           id={"slider" + rowId}
           className="w-full h-full overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide  relative"
         >
           {movies.map((item, id) => {
-            return <Movie item={item} id={id} />;
+            return (
+              <>
+                <Movie  item={item} id={id} />
+              </>
+            );
           })}
         </div>
-        <MdChevronRight onClick = {slideRight} className = "bg-white rounded-full absolute hidden opacity-50 hover:opacity-100  z-20  cursor:pointer group-hover:block right-0" size={40} />
-
+        <MdChevronRight
+          onClick={slideRight}
+          className="bg-white rounded-full absolute hidden opacity-50 hover:opacity-100  z-20  cursor:pointer group-hover:block right-0"
+          size={40}
+        />
       </div>
     </>
   );

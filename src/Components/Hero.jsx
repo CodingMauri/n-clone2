@@ -1,8 +1,15 @@
 import { React, useState, useEffect } from "react";
 import axios from "axios";
-import requests from "../Requests";
-const Main = () => {
+import requests from "../Requests"
+import {useNavigate} from "react-router-dom"
+const Hero = () => {
+
+  const navigate = useNavigate()
   const [popularMovie, setPopularMovies] = useState([]);
+
+  
+
+  
 
   const mixMovies =
     popularMovie[Math.floor(Math.random() * popularMovie.length)];
@@ -13,7 +20,14 @@ const Main = () => {
       .then((res) => setPopularMovies(res.data.results))
       .catch((err) => console.log(err));
   }, []);
-  // console.log(mixMovies);
+
+  
+
+  
+
+  const handleTrailerClick = () => {
+    navigate(`/trailer/${mixMovies.id}`);
+  }
 
   const cutText = (str, num) => {
     if (str?.length > num) {
@@ -22,7 +36,8 @@ const Main = () => {
       return str;
     }
   };
-
+  
+  
   // const scaleUp = {
   //   scale:1.2
   // }
@@ -40,8 +55,8 @@ const Main = () => {
             {mixMovies?.title}
           </h1>
           <div>
-            <button className="border bg-gray-300 text-black border-gray-300 py-2 px-5">
-              Play
+            <button onClick = {handleTrailerClick}className="border bg-gray-300 text-black border-gray-300 py-2 px-5">
+              Play Trailer
             </button>
             <button className="border text-white border-gray-300 py-2 px-5 ml-4">
               {" "}
@@ -61,4 +76,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default Hero;
