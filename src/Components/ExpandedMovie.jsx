@@ -1,4 +1,4 @@
-import { React , useState} from "react";
+import { React} from "react";
 import { FiPlayCircle } from "react-icons/fi";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
