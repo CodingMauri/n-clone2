@@ -6,13 +6,6 @@ import Modal from "./Modal";
 function ExpandedMovie({ item }) {
   const navigate = useNavigate();
 
-<<<<<<< HEAD
-function ExpandedMovie({ item, handlePosterClick }) {
-
-
-  
-
-=======
   const [openModal,setOpenModal] = useState(false)
   const handleTrailerClick = () => {
     navigate(`/trailer/${item.id}`);
@@ -21,7 +14,6 @@ function ExpandedMovie({ item, handlePosterClick }) {
   const clickModal = () => {
     setOpenModal(true)
   };
->>>>>>> 07f4fc1b563f180dce43fc9e2843d7419f4d80e7
   return (
     <>
       <div className="absolute w-[94.5%] bottom-0 h-[100px] bg-gradient-b from-[black] to-transparent text-white">

@@ -3,24 +3,25 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Youtube from "react-youtube";
 import { getYoutubeData } from "../Requests";
+import { getMovieInfo } from "../Requests";
 function Trailer() {
   const [selected, setSelected] = useState([]);
 
-  const { movieId } = useParams();
+  const { movieId} = useParams();
 
-  const { backdrop_path } = useParams();
+  const [movieInfo,setMovieInfo] = useState([])
 
-  console.log(backdrop_path)
+
   useEffect(() => {
     getYoutubeData(movieId, setSelected);
   }, [movieId]);
 
-  console.log(movieId);
   const endTrailer = (e) => {
     if (e.data === window.YT.PlayerState.ENDED) {
       e.target.pauseVideo();
     }
-  };
+  }; 
+  console.log(movieInfo)
 
   const officialTrailer = selected
     ?.filter((video) => video.type === "Trailer" && video.official)
@@ -31,27 +32,36 @@ function Trailer() {
     .find((video) => video.site === "YouTube");
 
   const opts = {
-    height: "390",
-    width: "640",
+    height: "100%",
+    width: "100%",
 
     playerVars: {
       autoplay: 1,
     },
   };
+
+  useEffect(() => {
+    getMovieInfo(movieId,setMovieInfo)
+  },[movieId])
+
+  
   return (
-    <div className="w-full h-full flex justify-center items-center  ">
-      {/* <div className = "w-full h-full object-cover">
-        <img src = {`https://image.tmdb.org/t/p/original${backdrop_path}`} alt = "movie" />
-      </div> */}
-       
-      {officialTrailer && (
-        <Youtube
-          videoId={officialTrailer?.key || fallbackTrailer?.key}
-          opts={opts}
-          onStateChange={endTrailer}
-        />
-      )}
-    </div>
+      <div className="w-screen h-screen flex justify-center items-center ">
+        <div className = "absolute w-full h-full bg-gradient-to-l from-black to-[#14141] z-10"></div>
+        <div className = "absolute w-full h-full   ">
+          <img className = "w-full h-full object-cover " src = {`https://image.tmdb.org/t/p/original/${movieInfo.backdrop_path} `} alt ={movieInfo.title} />
+        </div>
+      
+
+        {officialTrailer && (
+          <Youtube
+            className = " w-[65%] h-[65%] md:min-h-[10%] relative z-20 "
+            videoId={officialTrailer?.key || fallbackTrailer?.key}
+            opts={opts}
+            onStateChange={endTrailer}
+          />
+        )}
+      </div>
   );
 }
 

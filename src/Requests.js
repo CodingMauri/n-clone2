@@ -42,4 +42,13 @@ const requests = {
   requestPopular: `${api}movie/popular?api_key=${key}&language=en-US&page=1`,
 };
 
+export function getMovieInfo(movieId,setMovieInfo){
+  axios
+  .get(`${api}movie/${movieId}?api_key=${key}&language=en-US`)
+  .then((res) => {
+    setMovieInfo(res.data)
+  })
+  .catch((err) => console.log(err))
+}
+
 export default requests;

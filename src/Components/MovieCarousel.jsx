@@ -49,15 +49,9 @@ const MovieCarousel = ({ movies, genre, rowId }) => {
         >
           {movies.map((item, id) => {
             return (
-<<<<<<< HEAD
-              
-                <Movie setShowTrailer={setShowTrailer} item={item} id={id} />
-              
-=======
               <>
                 <Movie  item={item} id={id} />
               </>
->>>>>>> 07f4fc1b563f180dce43fc9e2843d7419f4d80e7
             );
           })}
         </div>
