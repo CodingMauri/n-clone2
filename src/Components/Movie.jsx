@@ -15,7 +15,7 @@ function Movie({ item }) {
           <ExpandedMovie item={item}  />
           )}
         <img
-          className="w-full h-auto block"
+          className="w-[95%]  h-auto block pr-3"
           src={`https://image.tmdb.org/t/p/w500/${item?.poster_path}`}
           alt={item?.title}
           id={item.id}

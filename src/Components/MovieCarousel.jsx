@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from "react";
 import axios from "axios";
 import Movie from "./Movie";
-import { MdChevronLeft, MdChevronRight } from "react-icons/md";
+
 import Slider from "react-slick/lib/slider";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -26,37 +26,44 @@ const MovieCarousel = ({ movies, genre, rowId }) => {
     getGenres();
   });
 
-  const slideLeft = () => {
-    let slider = document.getElementById("slider" + rowId);
-    slider.scrollLeft = slider.scrollLeft - 500;
-  };
-  const slideRight = () => {
-    let slider = document.getElementById("slider" + rowId);
-    slider.scrollLeft = slider.scrollLeft + 500;
-  };
+  
 
   const settings = {
     dots: false,
     infinite: false,
     speed: 500,
-    slidesToShow: 6,
+    slidesToShow: 7,
     slidesToScroll: 4,
-    responsive:[
+    responsive: [
       {
-        breakpoint:750,
-        settings:{
-          slidesToShow:5,
-          slidesToScroll:2,
-        }
+        breakpoint: 1650,
+        settings: {
+          slidesToShow: 6,
+          slidesToScroll: 3,
+        },
+      },
+      {
+        breakpoint: 1300,
+        settings: {
+          slidesToShow: 5,
+          slidesToScroll: 3,
+        },
+      },
+      {
+        breakpoint: 1250,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 2,
+        },
       },
       {
         breakpoint: 500,
-        settings:{
+        settings: {
           slidesToShow: 3,
-          slidesToScrol:3,
-        }
-      }
-    ]
+          slidesToScrol: 3,
+        },
+      },
+    ],
   };
 
   return (
@@ -65,8 +72,8 @@ const MovieCarousel = ({ movies, genre, rowId }) => {
         {genreName} movies
       </h1>
       <div className="relative flex items-center group">
-        <Slider {...settings}
-          id={"slider" + rowId}
+        <Slider
+          {...settings}
           className="w-full h-full whitespace-nowrap  relative"
         >
           {movies.map((item, id) => {
