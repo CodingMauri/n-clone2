@@ -7,7 +7,7 @@ function Movie({ item }) {
     
     <motion.div
     whileHover={{ transition: 1, scale: 0.9 }}
-    className="w-[160px] sm:w-[200px] md:w-[240px] lg:w-[280px] inline-block cursor-pointer relative p-2 "
+    className="w-[160px] sm:w-[200px] md:w-[240px] lg:w-[280px] xl:w-[290px] 2xl:w-[300px] inline-block cursor-pointer relative p-2 "
     onMouseEnter={() => setExpand(item)}
     onMouseLeave={() => setExpand(null)}
     >
@@ -15,7 +15,7 @@ function Movie({ item }) {
           <ExpandedMovie item={item}  />
           )}
         <img
-          className="w-full h-auto block"
+          className="w-[95%]  h-auto block pr-3"
           src={`https://image.tmdb.org/t/p/w500/${item?.poster_path}`}
           alt={item?.title}
           id={item.id}

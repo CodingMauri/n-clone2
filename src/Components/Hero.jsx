@@ -42,9 +42,9 @@ const Hero = () => {
   //   scale:1.2
   // }
   return (
-    <div className="w-full h-[750px] md:min-h-[500px] text-white">
+    <div className="w-full h-[770px] md:min-h-[500px] text-white">
       <div className="w-full h-full">
-        <div className="absolute w-full h-[750px] md:min-h-[500px]  bg-gradient-to-b from-transparent to-[#141414]"></div>
+        <div className="absolute w-full h-[770px] md:min-h-[500px]  bg-gradient-to-b from-transparent to-[#141414]"></div>
         <img
           className="w-full h-full object-cover"
           src={`https://image.tmdb.org/t/p/original/${mixMovies?.backdrop_path}`}
@@ -64,7 +64,7 @@ const Hero = () => {
             </button>
           </div>
           <p className="text-gray-400 text-sm my-4">
-            Released:{mixMovies?.release_date}
+            Released: {mixMovies?.release_date}
           </p>
           <p className="w-full md:max-w-[70%] lg:max-w-[50%] xl:max-w-[35%] text-gray-200">
             {cutText(mixMovies?.overview, 200)}
