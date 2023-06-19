@@ -10,13 +10,12 @@ function ExpandedMovie({ item }) {
   const handleTrailerClick = () => {
     navigate(`/trailer/${item.id}`);
   };
-  console.log(item)
   // const clickModal = () => {
   //   setOpenModal(true)
   // };
   return (
     <>
-      <div className="absolute w-[94.5%] bottom-0 h-[100px] bg-gradient-b from-[black] to-transparent text-white">
+      <div className="absolute w-[95%] bottom-0 h-[100px] bg-gradient-b from-[black] to-transparent text-white">
         <div className="w-full h-full absolute text-4xl flex justify-center items-center">
           <div>
             <motion.div whileHover={{ scale: 1.2 }}>

@@ -21,7 +21,6 @@ function Trailer() {
       e.target.pauseVideo();
     }
   }; 
-  console.log(movieInfo)
 
   const officialTrailer = selected
     ?.filter((video) => video.type === "Trailer" && video.official)

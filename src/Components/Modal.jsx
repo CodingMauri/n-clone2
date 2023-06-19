@@ -3,7 +3,6 @@ import { MdNightlightRound } from 'react-icons/md'
 
 function Modal({open,item}) {
 
-    console.log(item)
 
     if(!open) return null
   return (
