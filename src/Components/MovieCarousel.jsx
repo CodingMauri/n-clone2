@@ -2,7 +2,7 @@ import { React, useState, useEffect } from "react";
 import axios from "axios";
 import Movie from "./Movie";
 
-import Slider from "react-slick/lib/slider";
+import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 const MovieCarousel = ({ movies, genre, rowId }) => {
@@ -72,20 +72,9 @@ const MovieCarousel = ({ movies, genre, rowId }) => {
         {genreName} movies
       </h1>
       <div className="relative flex items-center group">
-<<<<<<< HEAD
-        <MdChevronLeft
-          onClick={slideLeft}
-          className="bg-white left-0 rounded-full absolute hidden opacity-50 hover:opacity-100 cursor-pointer z-10 group-hover:block"
-          size={40}
-        />
-        <div
-          id={"slider" + rowId}
-          className="w-full h-full overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide relative"
-=======
         <Slider
           {...settings}
           className="w-full h-full whitespace-nowrap  relative"
->>>>>>> a60a2586a8257a0ba137cbcd37b8868a55e05524
         >
           {movies.map((item, id) => {
             return (
