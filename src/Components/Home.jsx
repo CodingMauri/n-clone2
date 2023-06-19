@@ -9,11 +9,11 @@ export default function Home() {
     <div className = "bg-[#141414]">
         
         <Hero /> 
-        <ActionMovies  rowId = "1" />
-        <HorrorMovies rowId = "2" />
-        <ComedyMovies rowId = "3" /> 
-        <AnimatedMovies rowId = "4" />
-        <CrimeMovies rowId = "5" />
+        <ActionMovies  />
+        <HorrorMovies  />
+        <ComedyMovies  /> 
+        <AnimatedMovies  />
+        <CrimeMovies  />
 
     </div>
   )
