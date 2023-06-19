@@ -6,14 +6,14 @@ import Trailer from "./Components/Trailer"
 function App() {
 
   return (
-    <>
+    <div className = "w-full">
 
       <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path = "/trailer/:movieId" element = {<Trailer />} />
       </Routes>
-    </>
+    </div>
   );
 }
 
