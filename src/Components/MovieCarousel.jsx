@@ -60,7 +60,7 @@ const MovieCarousel = ({ movies, genre, rowId }) => {
         breakpoint: 500,
         settings: {
           slidesToShow: 3,
-          slidesToScrol: 3,
+          slidesToScroll: 3,
         },
       },
     ],
@@ -71,10 +71,10 @@ const MovieCarousel = ({ movies, genre, rowId }) => {
       <h1 className="text-white font-bold md:text-xl py-9 ml-5">
         {genreName} movies
       </h1>
-      <div className="relative flex items-center group">
+      <div className="relative flex items-center">
         <Slider
           {...settings}
-          className="w-full h-full whitespace-nowrap  relative"
+          className="w-full h-full"
         >
           {movies.map((item, id) => {
             return (
