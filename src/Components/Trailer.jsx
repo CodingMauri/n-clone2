@@ -52,13 +52,17 @@ function Trailer() {
         </div>
       
 
-        {officialTrailer && (
+        {officialTrailer ? (
           <Youtube
             className = " w-[65%] h-[65%] md:min-h-[10%] relative z-20 "
             videoId={officialTrailer?.key || fallbackTrailer?.key}
             opts={opts}
             onStateChange={endTrailer}
           />
+        ):(
+          <div className = "w-full h-screen justify-center items-center bg-[#141414]">
+            <h1>Nothing found</h1>
+          </div>
         )}
       </div>
   );

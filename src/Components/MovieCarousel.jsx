@@ -5,32 +5,34 @@ import Movie from "./Movie";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-const MovieCarousel = ({ movies, genre, rowId }) => {
+const MovieCarousel = ({ movies, genre, searchQuery }) => {
   //calling for genres
   const [genreName, setGenreName] = useState("");
   // console.log(genre)
   const getGenres = () => {
-    axios
-      .get(
-        `https://api.themoviedb.org/3/genre/movie/list?api_key=${process.env.REACT_APP_MOVIE_KEY}`
-      )
-      .then((res) => {
-        const foundGenre = res.data.genres.find((g) => g.id === genre);
-        if (foundGenre) {
-          setGenreName(foundGenre.name);
-        }
-      })
-      .catch((err) => console.log(err));
+    if (searchQuery) {
+      setGenreName(searchQuery);
+    } else {
+      axios
+        .get(
+          `https://api.themoviedb.org/3/genre/movie/list?api_key=${process.env.REACT_APP_MOVIE_KEY}`
+        )
+        .then((res) => {
+          const foundGenre = res.data.genres.find((g) => g.id === genre);
+          if (foundGenre) {
+            setGenreName(foundGenre.name);
+          }
+        })
+        .catch((err) => console.log(err));
+    }
   };
   useEffect(() => {
     getGenres();
   });
 
-  
-
   const settings = {
     dots: false,
-    infinite: false,
+    infinite: true,
     speed: 500,
     slidesToShow: 7,
     slidesToScroll: 4,
@@ -69,13 +71,10 @@ const MovieCarousel = ({ movies, genre, rowId }) => {
   return (
     <>
       <h1 className="text-white font-bold md:text-xl py-9 ml-5">
-        {genreName} movies
+        {genreName && !searchQuery ? `${genreName} movies` : genreName}
       </h1>
       <div className="relative flex items-center">
-        <Slider
-          {...settings}
-          className="w-full h-full"
-        >
+        <Slider {...settings} className="w-full h-full">
           {movies.map((item, id) => {
             return (
               <>
