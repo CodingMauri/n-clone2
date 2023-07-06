@@ -52,19 +52,10 @@ export function getMovieInfo(movieId,setMovieInfo){
 }
 
 
-export const searchMovies = async(search) => {
-    try{
-      const response = await axios.get(`${api}/search/movie`, {
-        params:{
-          api_key:key,
-          search: search,
-        }
-      });
-      return response.data.results
-
-    } catch(error){
-        console.log(error);
-        return [];
-    }
+export const searchMovies = (searchQuery, setSearchMovie) => {
+  axios.get(`${api}search/movie?api_key=${key}&query=${searchQuery}&page=1`)
+  .then((res) => setSearchMovie(res.data.results))
+  .catch((err) => console.log(err))
+    
 }
 export default requests;

@@ -1,32 +1,34 @@
-import React, { useState, useEffect,useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { FiSearch } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
-import { searchMovies } from "../Requests";
-import SearchedMovies from "./SearchedMovies";
 export default function NavBar() {
   const [searchQuery, setSearchQuery] = useState("");
   const [isSearchExpanded, setSearchExpanded] = useState(false);
-  const [searchedMovie, setSearchedMovies] = useState([]);
   const [opacity, setOpacity] = useState(0);
 
-  const searchContainerRef  = useRef(null);
-  const searchIconRef = useRef(null)
 
+  const navigate = useNavigate()
+  
   //Search Logic && Search Icon functions
 
-  const handleSearch = async () => {
-    if (searchQuery.trim() !== "") {
-      const results = await searchMovies(searchQuery);
-      setSearchedMovies(results);
-      setSearchExpanded(false); // Close the search input after searching
+  const handleSubmit = (e) =>{
+    e.preventDefault();
+    if(searchQuery !== ""){
+
+      navigate(`/search/${searchQuery}`)
     }
-  };
+
+    setSearchExpanded(false)
+  }
 
   const handleIconClick = () => {
     setSearchExpanded(!isSearchExpanded);
   };
-
+  const handleLogoClick = () => {
+    navigate('/')
+  }
   //Handles transition effect
 
   const handleScroll = () => {
@@ -60,7 +62,8 @@ export default function NavBar() {
       style={navbarStyle}
     >
       <img
-        className="w-32 pl-9"
+        onClick = {handleLogoClick}
+        className="w-32 pl-9 cursor-pointer z-10"
         src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg"
         alt="Netflix-logo"
       ></img>
@@ -82,19 +85,20 @@ export default function NavBar() {
 
       <AnimatePresence>
         {isSearchExpanded && (
-          <motion.div
-            key="searchContainer"
+          <motion.form
+            type = "submit"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="absolute z-0"
+            className="absolute w-4/5 md:w-1/5 sm:transform-x-1/2 "
             style = {{
               top:"50%",
               left: "80%",
-              transform: "translate(-50%,-50%)"
+              transform: "translate(-50%,-50%)",
+            
             }}
+            onSubmit = {handleSubmit}
 
-            ref = {searchContainerRef}
             
           >
             <input
@@ -102,13 +106,11 @@ export default function NavBar() {
               placeholder="Search for a movie"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              onSubmit = {handleSearch}
               className="relative text-white border border-gray-300 bg-[#141414] px-4  py-2 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent"
             />
-          </motion.div>
+          </motion.form>
         )}
       </AnimatePresence>
-      {searchedMovie.length > 0 && <SearchedMovies searchedMovie = {searchedMovie} />}
     </div>
   );
 }
