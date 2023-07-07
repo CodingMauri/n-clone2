@@ -1,13 +1,15 @@
 import { React, useState, useEffect } from "react";
 import axios from "axios";
-import Movie from "./Movie";
-
+import {motion} from "framer-motion"
 import Slider from "react-slick";
+import ExpandedMovie from "./ExpandedMovie"
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 const MovieCarousel = ({ movies, genre, searchQuery }) => {
   //calling for genres
   const [genreName, setGenreName] = useState("");
+  const [expand, setExpand] = useState(null);
+
   // console.log(genre)
   const getGenres = () => {
     if (searchQuery) {
@@ -26,6 +28,7 @@ const MovieCarousel = ({ movies, genre, searchQuery }) => {
         .catch((err) => console.log(err));
     }
   };
+  
   useEffect(() => {
     getGenres();
   });
@@ -77,9 +80,24 @@ const MovieCarousel = ({ movies, genre, searchQuery }) => {
         <Slider {...settings} className="w-full h-full">
           {movies.map((item, id) => {
             return (
-              <>
-                <Movie item={item} id={id} />
-              </>
+              <motion.div
+              whileHover={{ transition: 1, scale: 0.9 }}
+              className="w-[160px] sm:w-[200px] md:w-[240px] lg:w-[280px] xl:w-[290px] 2xl:w-[300px] inline-block cursor-pointer relative p-2 "
+              onMouseEnter={() => setExpand(item)}
+              onMouseLeave={() => setExpand(null)}
+              >
+                  {expand === item && (
+                    <ExpandedMovie item={item}  />
+                    )}
+                  <img
+                    className="w-[95%]  h-auto block overflow-hidden m-1"
+                    src={`https://image.tmdb.org/t/p/w500/${item?.poster_path}`}
+                    alt={item?.title}
+                    id={item.id}
+                  />
+          
+                  
+                </motion.div>
             );
           })}
         </Slider>

@@ -46,9 +46,9 @@ function Trailer() {
   
   return (
       <div className="w-screen h-screen flex justify-center items-center ">
-        <div className = "absolute w-full h-full bg-gradient-to-l from-black to-[#14141] z-10"></div>
         <div className = "absolute w-full h-full   ">
           <img className = "w-full h-full object-cover " src = {`https://image.tmdb.org/t/p/original/${movieInfo.backdrop_path} `} alt ={movieInfo.title} />
+        <div className = "fixed bg-black/40 top-0 left-0 w-full h-screen"></div>
         </div>
       
 
