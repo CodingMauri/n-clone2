@@ -53,4 +53,7 @@ export const CrimeMovies = withGenre(MovieCarousel, 80);
 - An issue i ran into was the genre filtering and keeping it all on one page. Netflix has their movies seperated by genre and all in one page and i was trying to figure out a way to do that without having to hardcode individual components and mapping through the api for each genre. I would have ended up with like 8 different components and I was really trying to keep the code as DRY as possible. So i came up with a Higher Ordered Component (HOC). This takes a component as an argument and returns basically an enhanced version of that component.
 - Here the code was taking in the wrapped component which is going to be my movie carousel and the genre ID i wanted so that it can then take those parameters and make an axios call with those specific id's and returning me the movies filtered by genre and that they go along with my MovieCarousel component. This way i was able to make 5 other components and kept my code DRY
 
+## Future Improvements
+
+- I want to add a modal that displays more movie information and movies that are like the one the user chose.
 
