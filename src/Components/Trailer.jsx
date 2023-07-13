@@ -47,7 +47,7 @@ function Trailer() {
   useEffect(() => {
     getMovieInfo(movieId, setMovieInfo);
     setTimeout(() => {
-      setLoading(true);
+      setLoading(false);
     },2000);
   }, [movieId]);
 
