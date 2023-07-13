@@ -1,14 +1,15 @@
 import { React, useState, useEffect } from "react";
 import axios from "axios";
-import {motion} from "framer-motion"
+import { motion } from "framer-motion";
 import Slider from "react-slick";
-import ExpandedMovie from "./ExpandedMovie"
+import ExpandedMovie from "./ExpandedMovie";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 const MovieCarousel = ({ movies, genre, searchQuery }) => {
   //calling for genres
   const [genreName, setGenreName] = useState("");
   const [expand, setExpand] = useState(null);
+  const [saved, setSaved] = useState([]);
 
   // console.log(genre)
   const getGenres = () => {
@@ -28,12 +29,20 @@ const MovieCarousel = ({ movies, genre, searchQuery }) => {
         .catch((err) => console.log(err));
     }
   };
-  
+
+  const handleSave = (item) => {
+    if (saved.includes(item.id)) {
+      setSaved(saved.filter((id) => id !== item.id));
+    } else {
+      setSaved([...saved, item.id]);
+    }
+  };
+
   useEffect(() => {
     getGenres();
   });
 
-  const settings = {
+  const [settings, setSettings] = useState({
     dots: false,
     infinite: true,
     speed: 500,
@@ -69,7 +78,27 @@ const MovieCarousel = ({ movies, genre, searchQuery }) => {
         },
       },
     ],
+  });
+  
+
+  useEffect(() => {
+    const numberOfMovies = movies.length;
+
+    let updatedSettings = { ...settings };
+
+    if (numberOfMovies <= 7) {
+      updatedSettings.slidesToShow = numberOfMovies;
+      updatedSettings.slidesToScroll = numberOfMovies;
+    }
+
+    setSettings(updatedSettings);
+  }, [movies]);
+
+  const isSaved = (item) => {
+    return saved.includes(item.id);
   };
+
+
 
   return (
     <>
@@ -81,23 +110,28 @@ const MovieCarousel = ({ movies, genre, searchQuery }) => {
           {movies.map((item, id) => {
             return (
               <motion.div
-              whileHover={{ transition: 1, scale: 0.9 }}
-              className="w-[160px] sm:w-[200px] md:w-[240px] lg:w-[280px] xl:w-[290px] 2xl:w-[300px] inline-block cursor-pointer relative p-2 "
-              onMouseEnter={() => setExpand(item)}
-              onMouseLeave={() => setExpand(null)}
+                key={id}
+                whileHover={{ transition: 1, scale: 0.9 }}
+                className="w-[160px] sm:w-[200px] md:w-[240px] lg:w-[280px] xl:w-[290px] 2xl:w-[300px] inline-block cursor-pointer relative p-2 "
+                onMouseEnter={() => setExpand(item)}
+                onMouseLeave={() => setExpand(null)}
               >
-                  {expand === item && (
-                    <ExpandedMovie item={item}  />
-                    )}
-                  <img
-                    className="w-[95%]  h-auto block overflow-hidden m-1"
-                    src={`https://image.tmdb.org/t/p/w500/${item?.poster_path}`}
-                    alt={item?.title}
-                    id={item.id}
+                {expand === item && (
+                  <ExpandedMovie
+                    item={item}
+                    isSaved={isSaved(item)}
+                    onSave={handleSave}
                   />
-          
-                  
-                </motion.div>
+                )}
+                <img
+                  className="w-[95%]  h-auto block overflow-hidden m-1"
+                  src={`https://image.tmdb.org/t/p/w500/${
+                    item?.poster_path || item?.img
+                  }`}
+                  alt={item?.title}
+                  id={item.id}
+                />
+              </motion.div>
             );
           })}
         </Slider>

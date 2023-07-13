@@ -1,11 +1,12 @@
 import { React, useState } from "react";
 import { FiPlayCircle, FiArrowDownCircle } from "react-icons/fi";
+import { AiOutlineCloseCircle } from "react-icons/ai";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { UserAuth } from "../context/AuthContext";
 import { db } from "../firebase";
-import { arrayUnion, doc, updateDoc } from "firebase/firestore";
+import { arrayUnion, doc, updateDoc, arrayRemove } from "firebase/firestore";
 
 function ExpandedMovie({ item }) {
   const [like, setLike] = useState(false);
@@ -31,6 +32,14 @@ function ExpandedMovie({ item }) {
       alert("Please log in to save a movie");
     }
   };
+
+  const removeShow = async () => {
+    if (user?.email) {
+      await updateDoc(movieID, {
+        savedMovies: arrayRemove(item.id),
+      });
+    }
+  };
   //Working on a Modal pop up that when clicked the user will get to see more information about the movie
   // const [openModal,setOpenModal] = useState(false)
   const handleTrailerClick = () => {
@@ -44,25 +53,29 @@ function ExpandedMovie({ item }) {
   return (
     <>
       <div className="w-[92%] h-20 bottom-0 absolute mx-auto text-2xl flex gap-9 justify-center items-center bg-[#141414]  shadow-md shadow-stone-950">
-        <div className  ="inline-flex absolute w-full top-4 text-gray-300 gap-10 justify-center">
-          <motion.div onClick={saveShow} className="text-white ">
-            {like ? (
-              <FaHeart className="" />
-            ) : (
-              <FaRegHeart className="" />
-            )}
-          </motion.div>
-          <motion.div className="" whileHover={{ scale: 1.2 }}>
-            <FiPlayCircle
-              className="text-white "
-              onClick={handleTrailerClick}
-            />
-          </motion.div>
-          <motion.div
-            whileHover={{ scale: 1.2 }}
-          >
-            <FiArrowDownCircle className  = "text-white"/>
-          </motion.div>
+        <div className="inline-flex absolute w-full top-4 text-gray-300 md:gap-10 justify-center ">
+          {saved && (
+            <motion.div onClick = {removeShow}>
+              <AiOutlineCloseCircle className="text-white" />
+            </motion.div>
+          )}
+
+          {!saved && (
+            <>
+              <motion.p onClick={saveShow} className="text-white ">
+                {like ? <FaHeart /> : <FaRegHeart />}
+              </motion.p>
+              <motion.div className="" whileHover={{ scale: 1.2 }}>
+                <FiPlayCircle
+                  className="text-white "
+                  onClick={handleTrailerClick}
+                />
+              </motion.div>
+              <motion.div whileHover={{ scale: 1.2 }}>
+                <FiArrowDownCircle className="text-white" />
+              </motion.div>
+            </>
+          )}
         </div>
       </div>
     </>
