@@ -3,9 +3,11 @@ import axios from "axios";
 import { motion } from "framer-motion";
 import Slider from "react-slick";
 import ExpandedMovie from "./ExpandedMovie";
+import Loading from "./Loading";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 const MovieCarousel = ({ movies, genre, searchQuery }) => {
+  const [loading, setLoading] = useState(true);
   //calling for genres
   const [genreName, setGenreName] = useState("");
   const [expand, setExpand] = useState(null);
@@ -40,6 +42,10 @@ const MovieCarousel = ({ movies, genre, searchQuery }) => {
 
   useEffect(() => {
     getGenres();
+
+    setTimeout(() => {
+      setLoading(false)
+    })
   });
 
   const [settings, setSettings] = useState({
@@ -79,7 +85,6 @@ const MovieCarousel = ({ movies, genre, searchQuery }) => {
       },
     ],
   });
-  
 
   useEffect(() => {
     const numberOfMovies = movies.length;
@@ -98,44 +103,48 @@ const MovieCarousel = ({ movies, genre, searchQuery }) => {
     return saved.includes(item.id);
   };
 
-
-
   return (
     <>
-      <h1 className="text-white font-bold md:text-xl py-9 ml-5">
-        {genreName && !searchQuery ? `${genreName} movies` : genreName}
-      </h1>
-      <div className="relative flex items-center">
-        <Slider {...settings} className="w-full h-full">
-          {movies.map((item, id) => {
-            return (
-              <motion.div
-                key={id}
-                whileHover={{ transition: 1, scale: 0.9 }}
-                className="w-[160px] sm:w-[200px] md:w-[240px] lg:w-[280px] xl:w-[290px] 2xl:w-[300px] inline-block cursor-pointer relative p-2 "
-                onMouseEnter={() => setExpand(item)}
-                onMouseLeave={() => setExpand(null)}
-              >
-                {expand === item && (
-                  <ExpandedMovie
-                    item={item}
-                    isSaved={isSaved(item)}
-                    onSave={handleSave}
-                  />
-                )}
-                <img
-                  className="w-[95%]  h-auto block overflow-hidden m-1"
-                  src={`https://image.tmdb.org/t/p/w500/${
-                    item?.poster_path || item?.img
-                  }`}
-                  alt={item?.title}
-                  id={item.id}
-                />
-              </motion.div>
-            );
-          })}
-        </Slider>
-      </div>
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
+          <h1 className="text-white font-bold md:text-xl py-9 ml-5">
+            {genreName && !searchQuery ? `${genreName} movies` : genreName}
+          </h1>
+          <div className="relative flex items-center">
+            <Slider {...settings} className="w-full h-full">
+              {movies.map((item, id) => {
+                return (
+                  <motion.div
+                    key={id}
+                    whileHover={{ transition: 1, scale: 0.9 }}
+                    className="w-[160px] sm:w-[200px] md:w-[240px] lg:w-[280px] xl:w-[290px] 2xl:w-[300px] inline-block cursor-pointer relative p-2 "
+                    onMouseEnter={() => setExpand(item)}
+                    onMouseLeave={() => setExpand(null)}
+                  >
+                    {expand === item && (
+                      <ExpandedMovie
+                        item={item}
+                        isSaved={isSaved(item)}
+                        onSave={handleSave}
+                      />
+                    )}
+                    <img
+                      className="w-[95%]  h-auto block overflow-hidden m-1"
+                      src={`https://image.tmdb.org/t/p/w500/${
+                        item?.poster_path || item?.img
+                      }`}
+                      alt={item?.title}
+                      id={item.id}
+                    />
+                  </motion.div>
+                );
+              })}
+            </Slider>
+          </div>
+        </>
+      )}
     </>
   );
 };

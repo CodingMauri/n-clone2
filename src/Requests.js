@@ -4,6 +4,8 @@ import MovieCarousel from "./Components/MovieCarousel";
 //This file is where i am going to keep the request i will be using
 const api = `https://api.themoviedb.org/3/`;
 const key = process.env.REACT_APP_MOVIE_KEY;
+
+
 //Creating a higher ordered component to filter out the movies by genreˆ
 const withGenre = (WrappedComponent, genre) => {
   return (props) => {
