@@ -45,7 +45,7 @@ const MovieCarousel = ({ movies, genre, searchQuery }) => {
 
     setTimeout(() => {
       setLoading(false)
-    })
+    },2000)
   });
 
   const [settings, setSettings] = useState({

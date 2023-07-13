@@ -20,7 +20,7 @@ const Hero = () => {
 
     setTimeout(() => {
       setLoading(false);
-    });
+    },2000);
   }, []);
 
   const handleTrailerClick = () => {

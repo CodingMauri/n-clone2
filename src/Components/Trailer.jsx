@@ -48,7 +48,7 @@ function Trailer() {
     getMovieInfo(movieId, setMovieInfo);
     setTimeout(() => {
       setLoading(true);
-    });
+    },2000);
   }, [movieId]);
 
   return (
