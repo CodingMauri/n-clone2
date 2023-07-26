@@ -48,10 +48,7 @@ export default function NavBar() {
     backgroundColor: `rgba(20,20,20, ${opacity})`,
   };
 
-  const scaleUp = {
-    scale: 1.2,
-    transition: { duration: 1.2 },
-  };
+ 
 
   useEffect(() => {
     handleScroll();
