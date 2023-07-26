@@ -57,6 +57,7 @@ export default function NavBar() {
     backgroundColor: `rgba(20,20,20, ${opacity})`,
   };
 
+
   useEffect(() => {
     handleScroll();
   });
