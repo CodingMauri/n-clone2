@@ -5,8 +5,7 @@
 - Users should also be able to create an account and save movies which it will be stored in their saved movies tab
 
 ## Live-Site
-https://react-netflix-clone-b4a34.firebaseapp.com
-
+https://netflix-clone2-3aad4.web.app/
 
 ## Design 
 ![image](https://github.com/CodingMauri/n-clone2/assets/106369465/47a653ab-2719-4fb9-821c-5fd5015ff785)
