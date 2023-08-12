@@ -14,6 +14,8 @@ const SavedShows = () => {
         })
     },[user?.email])
 
+
+  
    
   return (
       <div className = "w-full ">
