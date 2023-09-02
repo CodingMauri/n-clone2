@@ -1,6 +1,5 @@
 {
   "hosting": {
-    "site": "netflix-clone2-3aad4",
     "public": "build",
     "ignore": [
       "firebase.json",
