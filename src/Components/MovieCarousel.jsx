@@ -97,7 +97,7 @@ const MovieCarousel = ({ movies, genre, searchQuery }) => {
     }
 
     setSettings(updatedSettings);
-  }, [movies]);
+  },[movies]);
 
   const isSaved = (item) => {
     return saved.includes(item.id);

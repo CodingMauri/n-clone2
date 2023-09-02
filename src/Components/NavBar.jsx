@@ -2,10 +2,8 @@ import React, { useState, useEffect } from "react";
 import { FiSearch } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate, Link } from "react-router-dom";
-import { UserAuth } from "../context/AuthContext";
 
 export default function NavBar() {
-  const { user, logOut } = UserAuth();
 
   const [searchQuery, setSearchQuery] = useState("");
   const [isSearchExpanded, setSearchExpanded] = useState(false);
@@ -15,14 +13,14 @@ export default function NavBar() {
 
   //Handle Logout functionality
 
-  const handleLogOut = async () => {
-    try {
-      await logOut();
-      navigate("/");
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const handleLogOut = async () => {
+  //   try {
+  //     await logOut();
+  //     navigate("/");
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
   //Search Logic && Search Icon functions
 
   const handleSubmit = (e) => {
@@ -83,19 +81,18 @@ export default function NavBar() {
         >
           <FiSearch className="text-white w-8 z-10" />
         </motion.div>
-      {user?.email ? (
+      {/* {user?.email ? (
         <div>
           <Link to="/account">
             <button className="text-white pr-4">Account</button>
           </Link>
           <button
-            onClick={handleLogOut}
             className="bg-red-700 px-6 py-2 mr-1 rounded cursor-pointer text-white "
             >
             Log out
           </button>
         </div>
-      ) : (
+      ) : ( */}
         <div>
           <Link to="/login">
             <button className="text-white pr-4">Sign In</button>
@@ -106,7 +103,7 @@ export default function NavBar() {
             </button>
           </Link>
         </div>
-      )}
+      
       </motion.div>
 
       <AnimatePresence>
